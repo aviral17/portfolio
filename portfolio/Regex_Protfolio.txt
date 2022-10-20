@@ -1,0 +1,3 @@
+\d\) *\w*\+*   for  Skills -->     1) React  2)JS  3) Python 4)  C++ 5) Rust
+
+

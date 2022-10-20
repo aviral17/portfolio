@@ -1,0 +1,9 @@
+1) WalletAdapterNetwork --> This is just an enumerable object for the available networks.
+
+2) WalletModalProvider  --> it's a fancy React component that will prompt the user to select their wallet.
+
+3) ConnectionProvider --->  It takes an RPC endpoint in and lets us talk directly to the nodes on the Solana blockchain. We'll use this throughout our app to send transactions.
+
+4) WalletProvider gives us a standard interface for connecting to all sorts of wallets, so we don't have to bother reading docs for each wallet.
+
+5) WalletMultiButton --> Wallet Button to connect any wallet. If not public key then WalletMultiButton.

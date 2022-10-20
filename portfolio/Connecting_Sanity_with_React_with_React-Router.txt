@@ -1,0 +1,7 @@
+https://www.sanity.io/guides/create-a-single-page-application-with-react-and-sanity
+
+With React Router
+
+https://www.sanity.io/docs/image-url
+
+\d\) *\w*\+*   for  Skills -->     1) React  2)JS  3) Python 4)  C++ 5) Rust
