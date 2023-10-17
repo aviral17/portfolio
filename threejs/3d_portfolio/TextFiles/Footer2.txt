@@ -1,0 +1,88 @@
+import React from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { SectionWrapper } from "../hoc";
+import "./others/footer.css";
+// import logo1 from "../assets/logos/newlogo3.svg";
+import logo1 from "../assets/logos/aviral5.svg";
+import bgblur from "../assets/tripguide.png";
+
+const Footer = () => {
+  const { scrollYProgress } = useScroll();
+  const scales = useTransform(scrollYProgress, [0, 1], [0, 2.9]);
+
+  return (
+    <div>
+      <div className="opacity-layer"></div>
+      <div>
+        <footer className="new_footer_area bg_color pt-[200px]">
+          {/* <img
+          src={bgblur}
+          className="absolute left-[50px] w-[500px] h-[500px] object-cover rounded-2xl"
+        />
+        <div className="relative left-[50px] -top-[100px] w-[200px] h-[200px] rounded-2xl bg-white bg-opacity-10 backdrop-blur-lg">
+          <motion.img src={logo1} className="w-full h-full" />
+        </div> */}
+
+          {/* <div className="relative left-[50px] -top-[100px] w-[100px] h-[100px]">
+          <img
+            src={bgblur}
+            className="absolute inset-0 w-full h-full object-cover rounded-2xl z-0"
+            />
+            <div className="absolute inset-0 rounded-2xl bg-white bg-opacity-5 backdrop-blur-lg z-10 w-[150px] h-[150px]  hover:shadow-2xl hover:shadow-rose-500 ">
+            <motion.img src={logo1} className="w-full h-full" />
+          </div>
+        </div> */}
+          {/* change inset of bgblur to change the position of back image */}
+
+          {/* TODO: Logo Start */}
+          {/* <div className="relative left-[50px] -top-[100px] w-[100px] h-[100px]">
+            <img
+              src={bgblur}
+              className="absolute inset-3 w-full h-full object-cover rounded-full z-0"
+            />
+            <motion.div
+              className="absolute inset-0 rounded-full bg-white border border-gray-700 bg-opacity-5 backdrop-blur-lg z-10 w-[150px] h-[150px]  hover:shadow-2xl hover:shadow-rose-500"
+              animate={{ rotate: 360 }}
+              transition={{
+                duration: 6,
+                ease: "linear",
+                repeat: Infinity,
+                repeatType: "loop",
+              }}
+            >
+              <motion.img src={logo1} className="w-full h-full" />
+            </motion.div>
+          </div> */}
+          {/* TODO: Logo End */}
+
+          <div>
+            <div className="relative left-[50px] -top-[50px] w-[100px] h-[100px]">
+              <motion.div className="absolute inset-0 opacity-80  w-[250px] h-[250px]">
+                <motion.img src={logo1} className="w-full h-full" />
+              </motion.div>
+            </div>
+            <a href={`mailto:${import.meta.env.VITE_APP_EMAIL}`}>
+              <div className="relative left-[50vh] -top-[4vh] border border-gray-900 rounded-2xl hover:bg-purple-700 max-w-[250px] flex items-center justify-center h-[50px] bg-transparent cursor-pointer transition-all ease-in-out delay-100 duration-400">
+                <p
+                  className={`text-white text-xl inline-block cursor-pointer text-underline-footer font-semibold`}
+                >
+                  E-mail Me 📨
+                </p>
+              </div>
+            </a>
+          </div>
+
+          <motion.div className="new_footer_top">
+            <div className="footer_bg">
+              {/* <div className="footer_bg_one"></div> */}
+              {/* <div className="footer_bg_two"></div> */}
+            </div>
+          </motion.div>
+        </footer>
+      </div>
+    </div>
+  );
+};
+
+// export default SectionWrapper(Footer, "footer");
+export default Footer;

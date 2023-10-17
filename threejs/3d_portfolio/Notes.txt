@@ -1,0 +1,120 @@
+****************************************************************************************************************************************************************************
+
+React Three Fiber DOCS ---->https://www.npmjs.com/package/@react-three/drei (using) and https://docs.pmnd.rs/react-three-fiber/getting-started/introduction
+
+****************************************************************************************************************************************************************************
+
+Starter commands --------------------->
+./ for current folder
+// https://vitejs.dev/guide/
+
+A) npm create vite@latest ./ -- --template react
+
+Installing Tailwind CSS
+B) npm install -D tailwindcss   and  npx tailwindcss init
+
+Installing Three JS
+
+1) --legacy-peer-deps ---> using this for react packages which still uses Older React Versions like react-tilt, etc
+2) @react-three/fiber ---> react based three js library for using react with three js
+3) maath ---> Math related functions and for geometry
+4) react-tilt  ----> for cool animations when hovering over a card
+5) react-vertical-timeline-component  ---> for the experience similar to the one on LinkedIn
+
+C) npm i --legacy-peer-deps @react-three/fiber @react-three/drei maath react-tilt react-vertical-timeline-component @emailjs/browser framer-motion react-router-dom
+   npm i three  (If some error occurs then use npm i --legacy-peer-deps three)
+
+Now with VITE-- We need to install something extra for our tailwind to work as in many cases, tailwind utility classes not getting applied, Link ----> https://tailwindcss.com/docs/guides/vite
+
+1) npm install --legacy-peer-deps  -D postcss autoprefixer  and npx tailwindcss init -p
+
+ERROR/INFO:- Note that it still didn't installed `postcss.config.cjs` so I manually need to create the file and add the contents inside the file 
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Using tailwind.config.cjs instead of tailwind.config.js
+
+A) Both .js and .cjs extensions can be used for Tailwind configuration files, and they can contain the same configuration code. However, the .cjs extension is recommended by the Tailwind documentation for Node.js environments because it ensures that the configuration file will be loaded as a CommonJS module.
+
+If we are working in a Node.js environment and we want to use a .js extension for your Tailwind configuration file, we will need to ensure that your build system or Node.js runtime is configured to load the file correctly. In most cases, this is not necessary and using the .cjs extension is sufficient.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+* PRELOAD * in Computers.jsx
+ 
+If you don't use Preload with the all prop in the above code, it is possible that some of the assets in your scene may not be loaded when the canvas is rendered. This could result in objects not being displayed, or being displayed with a delay or flickering effect.
+
+Without Preload, the assets would still load but asynchronously, which means that some of them may not be loaded when the scene is rendered. By using Preload with the all prop, you can ensure that all assets are loaded before the scene is rendered, which can provide a smoother and more consistent user experience.
+
+However, if you are sure that your scene has only a few assets, or if you are not experiencing any issues with loading, you may not need to use Preload with the all prop. In such cases, you can use Preload to load specific assets that are critical to your scene, and rely on asynchronous loading for other assets.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+* FRAMER MOTION * Hoc inside src
+
+The code you have provided is actually a Higher Order Component (HOC) called StarWrapper which wraps another component and applies some animation effects using Framer Motion.
+
+Here's a detailed breakdown of the code:
+
+import { styles } from "../styles";: Importing styles object from another file called styles.js.
+
+import { staggerContainer } from "../utils/motion";: Importing a function called staggerContainer from another file called motion.js located in the utils folder.
+
+const StarWrapper = (Component, idName) => function HOC() {...};: Defining a function component called StarWrapper which takes two arguments: Component and idName. Component is a reference to the component that will be wrapped by this HOC, and idName is an optional argument that represents the ID of a span element in the wrapped component.
+
+<motion.section ...>: This is a Framer Motion component called motion.section. It creates a container for the wrapped component and applies some animation effects to it.
+
+variants={staggerContainer()}: The variants prop defines the different states of the animation. It is set to the result of calling the staggerContainer function, which returns an object containing the different variants.
+
+initial="hidden": The initial prop defines the initial state of the animation. In this case, it is set to "hidden", which means that the wrapped component will be hidden by default.
+
+whileInView="show": The whileInView prop defines the animation that should be applied while the wrapped component is in view. In this case, it is set to "show", which means that the wrapped component will be gradually revealed as it comes into view.
+
+viewport={{ once: true, amount: 0.25 }}: The viewport prop defines the portion of the screen that triggers the animation. In this case, it is set to { once: true, amount: 0.25 }, which means that the animation will only trigger once when the wrapped component is within 25% of the viewport.
+
+className={${styles.padding} max-w-7xl mx-auto relative z-0}: The className prop sets the CSS classes of the container. It is a template string that combines some predefined classes from the styles object with some custom classes.
+
+<span className="hash-span" id={idName}>&nbsp;</span>: This is an optional span element that is used to create a hash symbol and give the wrapped component an ID. The ID is passed as a prop called idName.
+
+<Component />: This is the wrapped component that is passed as a prop to StarWrapper. It will be rendered inside the motion.section container and will be animated according to the animation effects defined in the variants and whileInView props.
+
+export default StarWrapper;: Exporting StarWrapper as the default component from this module. This allows other components to import and use this HOC to apply animation effects to their own components.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+* staggerContainer() *
+
+The staggerContainer function is a utility function that returns an object with two properties: hidden and show. These properties define the animation behavior for the motion component that is using this object as its variants prop.
+
+The hidden property is an empty object, which means that there is no animation defined for this state.
+
+The show property is where the animation is defined. It has a transition property that contains two values: staggerChildren and delayChildren. These values control the timing and sequencing of child components' animations within the parent motion component.
+
+The staggerChildren value determines the time delay between the start of each child component's animation. This creates a staggered effect where each child component animates with a delay after the previous one.
+
+The delayChildren value determines the delay before the animation of the first child component starts. If this value is not provided, it defaults to 0, which means that all child components start animating at the same time.
+
+In the StarWrapper function, staggerContainer is used as the variants prop value for the motion.section component. This means that when the whileInView prop is set to "show", the animation defined in staggerContainer will be triggered. The viewport prop specifies the conditions for triggering the animation, in this case, when the motion.section component is within 25% of the viewport.
+
+The idName parameter is used to set the id attribute of the span element, which can be used for styling or other purposes. The Component parameter is a reference to the component that will be wrapped with the motion.section component and rendered within it.
+
+Overall, the StarWrapper function is a Higher-Order Component (HOC) that adds animation behavior to a given component by wrapping it with a motion.section component and providing the animation configuration through the staggerContainer function.
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+*  REACTb Intersection Observer  *
+
+install -----> npm i react-intersection-observer
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+A)  React.forwardRef ----------> 
+
+React.forwardRef is used to create a new component that can accept a ref as a prop and pass it down to one of its child elements. This is necessary because function components in React do not accept ref props by default. If you try to pass a ref prop to a function component, you will see a warning message in the console and the ref will not be attached to any element.
+
+In the example I provided in my previous message, React.forwardRef is used to create a new Experience component that can accept a ref as a prop and attach it to its root div element. This allows you to access the DOM node of the Experience component and use its position to calculate when it is 35% in view.
+
+If you don’t use React.forwardRef and try to pass a ref prop directly to your Experience component, you will see a warning message in the console and the ref will not be attached to any element. This means that you won’t be able to access the DOM node of the Experience component and use its position in your calculations.
+
+So, while you can pass other props directly to your Experience component without using React.forwardRef, you need to use it if you want to pass a ref prop and attach it to one of the component’s child elements.
+

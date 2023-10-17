@@ -1,0 +1,81 @@
+import { useEffect, useState } from "react";
+
+const ScrollProgress = ({ experienceRef }) => {
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  // const handleScroll = () => {
+  //   const totalHeight = document.body.scrollHeight - window.innerHeight;
+  //   const scrollPosition = window.pageYOffset;
+  //   const viewportHeight = window.innerHeight;
+  //   const experienceTop =
+  //     experienceRef.current.getBoundingClientRect().top + scrollPosition;
+  //   const experienceStart = experienceTop + viewportHeight * 0.35;
+  //   const scrollPercentage =
+  //     (scrollPosition + viewportHeight * 0.8 - experienceStart) / totalHeight;
+  //   setScrollProgress(Math.max(0, scrollPercentage));
+  // };
+
+  // document.documentElement.scrollHeight  ---------> Actual Height of Entire document
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollable =
+        document.documentElement.scrollHeight - window.innerHeight; // check below page
+
+      const scrolled = window.scrollY;
+
+      if (Math.floor(scrolled) === scrollable) {
+        console.log("You've reached the bottom!");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  // useEffect(() => {
+  //   let debounceTimeout;
+
+  //   const handleScroll = () => {
+  //     clearTimeout(debounceTimeout);
+
+  //     debounceTimeout = setTimeout(() => {
+  //       const scrollable =
+  //         document.documentElement.scrollHeight - window.innerHeight;
+  //       const scrolled = window.scrollY;
+
+  //       if (Math.floor(scrolled) === scrollable) {
+  //         console.log("You've reached the bottom!");
+  //       }
+  //     }, 100);
+  //   };
+
+  //   window.addEventListener("scroll", handleScroll);
+
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
+
+  return (
+    <div className="scroll-progress-container">
+      <div
+        className="scroll-progress-bar"
+        style={{ height: `${scrollProgress * 100}%` }}
+      />
+    </div>
+  );
+};
+
+export default ScrollProgress;
+
+/* ------------------- */
+// scrollable is in integer  and scrolled is in fraction probable 0.5 bigger than the window.innerHeight when scrolled to bottom of page
+
+// document.documentElement.scrollHeight returns the height of the entire document, including content that is not visible on the screen due to scrolling. window.innerHeight, on the other hand, returns the height of the window’s content area, which is the visible portion of the page.
+
+// By subtracting window.innerHeight from document.documentElement.scrollHeight, you get the maximum number of pixels that the content can be scrolled vertically. This value is stored in the scrollable variable.
+
+// In other words, scrollable represents the height of the non-visible portion of the page that can be scrolled into view.
